@@ -1,9 +1,10 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { json, Response, urlencoded } from "express";
-import { appRoutes } from "./routes/app.routes";
+import { IAppDependencies } from ".";
+import { UserController } from "./domain/user/user.handler";
 
-const main = () => {
+const main = (dependencies: IAppDependencies) => {
   const app = express();
   app.use(cookieParser());
   app.use(urlencoded({ extended: true }));
@@ -16,8 +17,10 @@ const main = () => {
     })
   );
 
-  app.use("/api", appRoutes);
+  const routes = express.Router();
+  routes.post("/users", new UserController(dependencies).createUser);
 
+  app.use("/api", routes);
   app.get("/api/healthz", (_, res: Response) => {
     res.status(200).json({ message: "Ok v1" });
   });
