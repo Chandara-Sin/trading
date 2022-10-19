@@ -1,7 +1,16 @@
 import { PrismaClient, User } from "../../generated/client";
+import { reqUser } from "./user";
 
 export class UserService {
   constructor(private readonly prisma: PrismaClient) {}
 
-  create = async (user: User) => this.prisma.user.create({ data: user });
+  create = async (user: reqUser) =>
+    this.prisma.user.create({
+      data: {
+        firstName: user.first_name,
+        lastName: user.last_name,
+        email: user.email,
+        hashedPassword: user.password,
+      },
+    });
 }

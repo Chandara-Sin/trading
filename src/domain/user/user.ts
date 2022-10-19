@@ -1,16 +1,23 @@
 import { User } from "../../generated/client";
 
+export interface reqUser {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+}
+
 export class UserModel {
   constructor(private instance: User) {}
 
   get toJson() {
     return {
       id: this.instance.id,
-      firstName: this.instance.firstName,
-      lastName: this.instance.lastName,
+      first_name: this.instance.firstName,
+      last_name: this.instance.lastName,
       email: this.instance.email,
-      createdAt: this.instance.createdAt,
-      updateAt: this.instance.updatedAt,
+      created_at: this.instance.createdAt,
+      updated_at: this.instance.updatedAt,
     };
   }
 }
