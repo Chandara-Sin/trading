@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { json, Response, urlencoded } from "express";
 import { IAppDependencies } from ".";
-import { UserHandler } from "./domain/user/user.handler";
+import { createUser } from "./domain/user/user.handler";
 
 const main = (dependencies: IAppDependencies) => {
   const app = express();
@@ -18,7 +18,7 @@ const main = (dependencies: IAppDependencies) => {
   );
 
   const routes = express.Router();
-  routes.post("/users", new UserHandler(dependencies).createUser);
+  routes.post("/users", createUser(dependencies));
 
   app.use("/api", routes);
   app.get("/api/healthz", (_, res: Response) => {
