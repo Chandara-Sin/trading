@@ -37,6 +37,9 @@
     "migrate": "yarn prisma migrate dev",
     "generate": "yarn prisma generate",
     "test": "jest --forceExit --config jest.config.ts",
-    "test:clean": "jest --clearCache"
+    "test:clean": "jest --clearCache",
+    "database-test:up": "docker-compose -f docker-compose.test.yml -p bt-test up -d && dotenv -e .env.test -- npx prisma migrate dev --name postgres-init",
+    "database-test:down": "docker-compose -f docker-compose.test.yml down",
+    "test:integration": "yarn test:clean && sleep 5 && dotenv -e .env.test -- jest -i --forceExit --config jest.config.integration.ts"
   }
 }
