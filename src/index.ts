@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import "dotenv/config";
 import { main } from "./app";
 import { initPrismaClient } from "./config/db";
-import { UserService } from "./domain/user/user.services";
+import { UserService } from "./domain/user/user.service";
 
 export interface IAppDependencies {
   userService: UserService;
