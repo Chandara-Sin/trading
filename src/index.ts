@@ -28,7 +28,7 @@ const start = () => {
   }
 };
 
-const initDependencies = (prismaClient: PrismaClient): IAppDependencies => ({
+export const initDependencies = (prismaClient: PrismaClient): IAppDependencies => ({
   userService: new UserService(prismaClient),
 });
 

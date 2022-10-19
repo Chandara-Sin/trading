@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  integration_test_db:
+    image: postgres:14.4-alpine
+    restart: always
+    container_name: integration_test_db
+    ports:
+      - '5431:5432'
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=my-secret-pw@
+      - POSTGRES_DB=trading_test
