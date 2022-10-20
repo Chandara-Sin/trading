@@ -5,13 +5,13 @@ import { reqUser, UserModel } from "./user";
 
 export const createUserHandler =
   (dependencies: IAppDependencies): Handler =>
-  async (req: Request, res: Response, next: NextFunction) => {
+  (req: Request, res: Response, next: NextFunction) => {
     const user: reqUser = req.body;
-    try {
-      const rs = await dependencies.userService.create(user);
-      res.status(201).send(new UserModel(rs).toJson);
-    } catch (err) {
-      logger.error("create err", err);
-      next(err);
-    }
+    dependencies.userService
+      .create(user)
+      .then(rs => res.status(201).send(new UserModel(rs).toJson))
+      .catch(err => {
+        logger.error("create err", err);
+        next(err);
+      });
   };

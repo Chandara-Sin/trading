@@ -5,7 +5,7 @@ export class UserService {
   constructor(private readonly prisma: PrismaClient) {}
 
   create = async (user: reqUser) =>
-    this.prisma.user.create({
+    await this.prisma.user.create({
       data: {
         firstName: user.first_name,
         lastName: user.last_name,
