@@ -1,5 +1,5 @@
 import { NextFunction, Request } from "express-serve-static-core";
-import { createUser } from "../../../src/domain/user/user.handler";
+import { createUserHandler } from "../../../src/domain/user/user.handler";
 import { User } from "../../../src/generated/client";
 import { mockHandler, MockDependencies, MockResponse } from "..";
 
@@ -18,7 +18,7 @@ describe("User", () => {
 
   it("should call user service", () => {
     dependencies.createUser(reqUser as User);
-    createUser(dependencies)(req, res as any, next);
+    createUserHandler(dependencies)(req, res as any, next);
     expect(dependencies.userService.create).toBeCalled();
   });
 
@@ -26,7 +26,7 @@ describe("User", () => {
     req.body = reqUser;
 
     dependencies.createUser(reqUser as User);
-    await createUser(dependencies)(req, res as any, next);
+    await createUserHandler(dependencies)(req, res as any, next);
 
     expect(res.status).lastCalledWith(201);
     expect(res.jsonBody()["id"]).toEqual(1);
