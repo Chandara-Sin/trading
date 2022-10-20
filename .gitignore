@@ -4,3 +4,4 @@
 /db-data
 /src/generated
 /coverage
+.DS_STORE
