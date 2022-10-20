@@ -1,8 +1,9 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import express, { json, Response, urlencoded } from "express";
+import express, { json, Response, Router, urlencoded } from "express";
 import { IAppDependencies } from ".";
-import { createUser } from "./domain/user/user.handler";
+import { createUserHandler } from "./domain/user/user.handler";
+import { mwLogger } from "./logger";
 
 const main = (dependencies: IAppDependencies) => {
   const app = express();
@@ -16,9 +17,10 @@ const main = (dependencies: IAppDependencies) => {
       credentials: true,
     })
   );
+  app.use(mwLogger);
 
-  const routes = express.Router();
-  routes.post("/users", createUser(dependencies));
+  const routes = Router();
+  routes.post("/users", createUserHandler(dependencies));
 
   app.use("/api", routes);
   app.get("/api/healthz", (_, res: Response) => {
