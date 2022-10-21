@@ -2,9 +2,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { json, NextFunction, Request, Response, Router, urlencoded } from "express";
 import { IAppDependencies } from ".";
-import { createUserHandler } from "./domain/user/user.handler";
 import { mwLogger } from "./logger";
-import { verifyAPIKey } from "./mw";
+import { appRoutes } from "./routes";
 
 const main = (dependencies: IAppDependencies) => {
   const app = express();
@@ -20,10 +19,7 @@ const main = (dependencies: IAppDependencies) => {
   );
   app.use(mwLogger);
 
-  const routes = Router();
-  routes.post("/users", verifyAPIKey(), createUserHandler(dependencies));
-
-  app.use("/api", routes);
+  app.use("/api", appRoutes(dependencies)(Router()));
   app.get("/api/healthz", (_, res: Response) => {
     res.status(200).json({ message: "Ok v1" });
   });
