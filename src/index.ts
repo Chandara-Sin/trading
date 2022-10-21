@@ -3,6 +3,7 @@ import "dotenv/config";
 import { main } from "./app";
 import { initPrismaClient } from "./config/db";
 import { UserService } from "./domain/user/user.service";
+import { logger } from "./logger";
 
 export interface IAppDependencies {
   userService: UserService;
@@ -24,7 +25,7 @@ const start = () => {
       );
     });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
   }
 };
 
