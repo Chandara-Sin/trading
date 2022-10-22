@@ -1,10 +1,15 @@
-import { PrismaClient } from "../../generated/client";
+import { PrismaClient, User } from "../../generated/client";
 import { reqUser } from "./user";
 
-export class UserService {
+export interface IUserService {
+  createUser: (user: reqUser) => Promise<User>;
+  getUser: (id: string) => Promise<User | null>;
+}
+
+export class UserService implements IUserService {
   constructor(private readonly prisma: PrismaClient) {}
 
-  create = async (user: reqUser) =>
+  createUser = async (user: reqUser) =>
     await this.prisma.user.create({
       data: {
         firstName: user.first_name,
@@ -13,4 +18,6 @@ export class UserService {
         hashedPassword: user.password,
       },
     });
+
+  getUser = async (id: string) => await this.prisma.user.findUnique({ where: { id } });
 }
