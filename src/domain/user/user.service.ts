@@ -4,6 +4,7 @@ import { reqUser } from "./user";
 export interface IUserService {
   createUser: (user: reqUser) => Promise<User>;
   getUser: (id: string) => Promise<User | null>;
+  updateUser: (user: Pick<reqUser, "first_name" | "last_name"> & { id: string }) => Promise<User>;
 }
 
 export class UserService implements IUserService {
@@ -20,4 +21,13 @@ export class UserService implements IUserService {
     });
 
   getUser = async (id: string) => await this.prisma.user.findUnique({ where: { id } });
+
+  updateUser = async (user: Pick<reqUser, "first_name" | "last_name"> & { id: string }) =>
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: {
+        firstName: user.first_name,
+        lastName: user.last_name,
+      },
+    });
 }
