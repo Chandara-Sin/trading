@@ -1,6 +1,7 @@
 import { Handler, NextFunction, Request, Response } from "express";
 import { PrismaClientKnownRequestError } from "../../generated/client/runtime";
 import { logger } from "../../logger";
+import { getPage, getRows, IPaginationParams, IPaginationRes } from "../../pagination";
 import { reqUser, UserModel } from "./user";
 import { IUserService } from "./user.service";
 
@@ -65,5 +66,34 @@ export const deleteUserHandler =
             ? new Error(`User ID not found ${id}`)
             : err
         );
+      });
+  };
+
+export const getUserListHandler =
+  (userService: IUserService): Handler =>
+  (req: Request, res: Response, next: NextFunction) => {
+    const { page, rows, sort, direction, search } = req.query as {
+      [key: string]: string | undefined;
+    };
+    const pag: IPaginationParams = {
+      page: getPage(page),
+      rows: getRows(rows),
+      sort,
+      direction,
+      search,
+    };
+    userService
+      .getUserList(pag)
+      .then(rs =>
+        res.status(200).send({
+          total: rs.total,
+          rows: rs.data.length,
+          page: getPage(page),
+          data: rs.data.map(usr => new UserModel(usr).toJson),
+        } as IPaginationRes)
+      )
+      .catch(err => {
+        logger.error("get user list err", err);
+        next(err);
       });
   };

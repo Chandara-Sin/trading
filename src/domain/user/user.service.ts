@@ -1,4 +1,5 @@
 import { PrismaClient, User } from "../../generated/client";
+import { getDirection, getPage, IPaginationParams } from "../../pagination";
 import { reqUser } from "./user";
 
 export interface IUserService {
@@ -6,6 +7,7 @@ export interface IUserService {
   getUser: (id: string) => Promise<User | null>;
   updateUser: (user: Pick<reqUser, "first_name" | "last_name"> & { id: string }) => Promise<User>;
   deleteUser: (id: string) => Promise<User>;
+  getUserList: (pag: IPaginationParams) => Promise<{ data: User[]; total: number }>;
 }
 
 export class UserService implements IUserService {
@@ -36,4 +38,16 @@ export class UserService implements IUserService {
     await this.prisma.user.delete({
       where: { id },
     });
+
+  getUserList = async (pag: IPaginationParams) => {
+    const data = await this.prisma.user.findMany({
+      skip: (pag.page - 1) * pag.rows,
+      take: pag.rows,
+      orderBy: {
+        [pag.sort ?? "id"]: getDirection(pag.direction),
+      },
+    });
+    const total = await this.prisma.user.count();
+    return { data, total };
+  };
 }
