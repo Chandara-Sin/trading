@@ -50,3 +50,20 @@ export const updateUserHandler =
         );
       });
   };
+
+export const deleteUserHandler =
+  (userService: IUserService): Handler =>
+  (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    userService
+      .deleteUser(id)
+      .then(() => res.status(200).json({ status: "ok" }))
+      .catch(err => {
+        logger.error("delete user err", err);
+        next(
+          err instanceof PrismaClientKnownRequestError && err.code === "P2025"
+            ? new Error(`User ID not found ${id}`)
+            : err
+        );
+      });
+  };

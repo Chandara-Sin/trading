@@ -5,6 +5,7 @@ export interface IUserService {
   createUser: (user: reqUser) => Promise<User>;
   getUser: (id: string) => Promise<User | null>;
   updateUser: (user: Pick<reqUser, "first_name" | "last_name"> & { id: string }) => Promise<User>;
+  deleteUser: (id: string) => Promise<User>;
 }
 
 export class UserService implements IUserService {
@@ -29,5 +30,10 @@ export class UserService implements IUserService {
         firstName: user.first_name,
         lastName: user.last_name,
       },
+    });
+
+  deleteUser = async (id: string) =>
+    await this.prisma.user.delete({
+      where: { id },
     });
 }
