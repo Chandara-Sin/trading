@@ -34,6 +34,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev --exit-child ./src/index.ts",
+    "build:local": "tsc --project ./ ; cp package.json ./build ; cp -r prisma ./build",
     "migrate": "yarn prisma migrate dev",
     "generate": "yarn prisma generate",
     "test": "jest --forceExit --config jest.config.ts",
