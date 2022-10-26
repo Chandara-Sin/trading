@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 services:
   db:
     image: postgres:14.4-alpine
@@ -12,3 +12,28 @@ services:
       - POSTGRES_DB=trading
     volumes: 
       - ./db-data:/var/lib/postgresql/data
+    # networks:
+    #   - trading-network
+
+  trading_api:
+    image: trading-api
+    platform: linux/arm64
+    container_name: trading-api
+    restart: always
+    command: sh -c "yarn generate && node ./src/index.js"
+    ports:
+      - '8080:8080'
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILD_TAG=trading-api
+        - ENVIRONMENT=local
+    depends_on:
+      - db
+    # networks:
+    #   - trading-network
+
+# networks:
+#   trading-network:
+#     driver: bridge
