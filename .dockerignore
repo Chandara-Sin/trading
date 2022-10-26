@@ -1,0 +1,11 @@
+# Docker file
+Dockerfile
+.dockerignore
+
+## Generated file when install and build
+node_modules
+build
+.git
+.gitignore
+README.md
+.env.test
