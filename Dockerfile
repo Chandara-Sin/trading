@@ -3,6 +3,10 @@ ARG BUILD_TAG
 LABEL build_tag=${BUILD_TAG}
 WORKDIR /app
 
+# Optional - M1
+# RUN apt-get update
+# RUN apt-get install -y openssl
+
 COPY package.json ./
 COPY yarn.lock ./
 
