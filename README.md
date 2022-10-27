@@ -32,6 +32,18 @@ yarn generate
 yarn migrate
 ```
 
+### Run Project
+
+```sh
+yarn dev
+```
+
+### Build Project
+
+```sh
+yarn build:local
+```
+
 ### Run Unit Test
 
 ```sh
