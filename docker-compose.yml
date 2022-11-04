@@ -12,12 +12,10 @@ services:
       - POSTGRES_DB=trading
     volumes: 
       - ./db-data:/var/lib/postgresql/data
-    # networks:
-    #   - trading-network
 
   trading_api:
     image: trading-api
-    platform: linux/arm64
+    platform: linux/amd64
     container_name: trading-api
     restart: always
     command: sh -c "yarn generate && node ./src/index.js"
@@ -31,9 +29,3 @@ services:
         - ENVIRONMENT=local
     depends_on:
       - db
-    # networks:
-    #   - trading-network
-
-# networks:
-#   trading-network:
-#     driver: bridge

@@ -1,14 +1,13 @@
 FROM node:16.17.0-bullseye-slim as Builder
 ARG BUILD_TAG
 LABEL build_tag=${BUILD_TAG}
-WORKDIR /app
+WORKDIR /root
 
 # Optional - M1
 # RUN apt-get update
 # RUN apt-get install -y openssl
 
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json yarn.lock ./
 
 RUN yarn install --ignore-optional --production
 
@@ -17,14 +16,10 @@ ARG ENVIRONMENT
 RUN yarn build:${ENVIRONMENT}
 
 FROM node:16.17.0-bullseye-slim
+ARG ENVIRONMENT
 WORKDIR /app
-COPY --from=Builder /app/build/ /app
-COPY --from=Builder /app/node_modules /app/node_modules
-COPY .env /app/.env
-
-# Set TimeZone
-# RUN apk --update add tzdata
-# RUN cp /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-# CMD ["cd","/app","yarn","prisma:generate","node","./src/index.js"]
+COPY --from=Builder /root/build/ /app
+COPY --from=Builder /root/node_modules /app/node_modules
+COPY .env.${ENVIRONMENT} /app/.env
 
 EXPOSE 8080

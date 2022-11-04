@@ -8,4 +8,5 @@ build
 .git
 .gitignore
 README.md
-.env.test
+jest.config.integration.ts
+.DS_Store
