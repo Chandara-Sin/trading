@@ -1,6 +1,8 @@
 # TRADING-API
 
-## For development
+## [For development](#create-env-for-api)
+
+## [Use Docker](#docker)
 
 ### Create `.env` for API
 
@@ -64,4 +66,30 @@ yarn database-test:up
 
 ```sh
 yarn test:integration
+```
+
+---
+
+## Docker
+
+### Create `.env.local` for API
+
+```env
+NODE_ENV=
+PORT=
+DATABASE_URL=postgresql://<user>:<password>@postgres:<port>/<db>?schema=public&connect_timeout=300
+PRISMA_GENERATE_OUTPUT=../src/generated/client
+API_KEY_PUBLIC=
+```
+
+### Run Docker Image Postgres
+
+```sh
+docker compose up db -d
+```
+
+### Run Project with Compose
+
+```sh
+docker compose up -d
 ```
