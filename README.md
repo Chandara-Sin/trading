@@ -1,8 +1,9 @@
 # TRADING-API
 
-## [For development](#create-env-for-api)
+- ### [For development](#for-development)
+- ### [Use Docker](#docker)
 
-## [Use Docker](#docker)
+## For Development
 
 ### Create `.env` for API
 
