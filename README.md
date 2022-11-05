@@ -21,7 +21,7 @@ API_KEY_PUBLIC=
 
 ## Prisma
 
-[https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-postgres/](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-postgres/)
+[More Info - _prisma set up relational database from scratch_](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgres)
 
 ### Generate Prisma Client for yarn berry
 
