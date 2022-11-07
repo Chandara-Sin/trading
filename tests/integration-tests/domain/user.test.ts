@@ -28,4 +28,10 @@ describe("User", () => {
 });
 
 const mockUserRequestHandler = (app: Express, user: reqUser) =>
-  supertest(app).post("/api/users").set("Content-Type", "application/json").send(mockReqUser);
+  supertest(app)
+    .post("/api/users")
+    .set({
+      "Content-Type": "application/json",
+      "X-API-KEY": "bXktYXBpLWtleS1wdWJsaWNA",
+    })
+    .send(mockReqUser);
