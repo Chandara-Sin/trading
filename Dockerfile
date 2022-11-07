@@ -23,3 +23,4 @@ COPY --from=Builder /root/node_modules /app/node_modules
 COPY .env.${ENVIRONMENT} /app/.env
 
 EXPOSE 8080
+CMD yarn generate ; node ./src/index.js

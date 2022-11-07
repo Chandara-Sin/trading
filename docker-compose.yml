@@ -18,7 +18,7 @@ services:
     platform: linux/amd64
     container_name: trading-api
     restart: always
-    command: sh -c "yarn generate && node ./src/index.js"
+    # command: sh -c "yarn generate && node ./src/index.js"
     ports:
       - '8080:8080'
     build:
