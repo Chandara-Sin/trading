@@ -32,6 +32,6 @@ const mockUserRequestHandler = (app: Express, user: reqUser) =>
     .post("/api/users")
     .set({
       "Content-Type": "application/json",
-      "X-API-KEY": "bXktYXBpLWtleS1wdWJsaWNA",
+      "X-API-KEY": Buffer.from(process.env.API_KEY_PUBLIC ?? "").toString("base64"),
     })
     .send(mockReqUser);
