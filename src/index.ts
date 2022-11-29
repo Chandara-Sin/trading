@@ -2,14 +2,18 @@ import { PrismaClient } from "@prisma/client";
 import "dotenv/config";
 import { main } from "./app";
 import { initPrismaClient } from "./config/db";
-import { IUserService, UserService } from "./domain/user/user.service";
 import { logger } from "./logger";
+import userService, { IUserService } from "./domain/user/user.service";
+
+const port = process.env.PORT ?? "8000";
 
 export interface IAppDependencies {
   userService: IUserService;
 }
 
-const port = process.env.PORT ?? "8000";
+export const initDependencies = (prismaClient: PrismaClient): IAppDependencies => ({
+  userService: userService(prismaClient),
+});
 
 const start = () => {
   try {
@@ -28,9 +32,5 @@ const start = () => {
     logger.error(err);
   }
 };
-
-export const initDependencies = (prismaClient: PrismaClient): IAppDependencies => ({
-  userService: new UserService(prismaClient),
-});
 
 start();

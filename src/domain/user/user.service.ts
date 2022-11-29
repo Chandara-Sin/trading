@@ -10,11 +10,9 @@ export interface IUserService {
   getUserList: (pag: IPaginationParams) => Promise<{ data: User[]; total: number }>;
 }
 
-export class UserService implements IUserService {
-  constructor(private readonly prisma: PrismaClient) {}
-
-  createUser = async (user: reqUser) =>
-    await this.prisma.user.create({
+function userService(db: PrismaClient): IUserService {
+  const createUser = async (user: reqUser) =>
+    await db.user.create({
       data: {
         firstName: user.first_name,
         lastName: user.last_name,
@@ -23,10 +21,10 @@ export class UserService implements IUserService {
       },
     });
 
-  getUser = async (id: string) => await this.prisma.user.findUnique({ where: { id } });
+  const getUser = async (id: string) => await db.user.findUnique({ where: { id } });
 
-  updateUser = async (user: Pick<reqUser, "first_name" | "last_name"> & { id: string }) =>
-    await this.prisma.user.update({
+  const updateUser = async (user: Pick<reqUser, "first_name" | "last_name"> & { id: string }) =>
+    await db.user.update({
       where: { id: user.id },
       data: {
         firstName: user.first_name,
@@ -34,20 +32,24 @@ export class UserService implements IUserService {
       },
     });
 
-  deleteUser = async (id: string) =>
-    await this.prisma.user.delete({
+  const deleteUser = async (id: string) =>
+    await db.user.delete({
       where: { id },
     });
 
-  getUserList = async (pag: IPaginationParams) => {
-    const data = await this.prisma.user.findMany({
+  const getUserList = async (pag: IPaginationParams) => {
+    const data = await db.user.findMany({
       skip: (pag.page - 1) * pag.rows,
       take: pag.rows,
       orderBy: {
         [pag.sort ?? "id"]: getDirection(pag.direction),
       },
     });
-    const total = await this.prisma.user.count();
+    const total = await db.user.count();
     return { data, total };
   };
+
+  return { createUser, getUser, updateUser, deleteUser, getUserList };
 }
+
+export default userService;

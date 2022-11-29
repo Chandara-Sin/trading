@@ -1,9 +1,19 @@
 import { Router } from "express";
 import { IAppDependencies } from "..";
+import {
+  createUserHandler,
+  getUserHandler,
+  getUserListHandler,
+  updateUserHandler,
+  deleteUserHandler,
+} from "../domain/user/user.handler";
 import { verifyAPIKey } from "../mw";
-import { userRoutes } from "./user.routes";
 
 export const appRoutes = (dependencies: IAppDependencies) => (route: Router) => {
-  route.use("/users", verifyAPIKey(), userRoutes(dependencies.userService)(route));
+  route.post("/users", verifyAPIKey(), createUserHandler(dependencies.userService));
+  route.get("/users/:id", verifyAPIKey(), getUserHandler(dependencies.userService));
+  route.get("/users", verifyAPIKey(), getUserListHandler(dependencies.userService));
+  route.put("/users", verifyAPIKey(), updateUserHandler(dependencies.userService));
+  route.delete("/users/:id", verifyAPIKey, deleteUserHandler(dependencies.userService));
   return route;
 };
