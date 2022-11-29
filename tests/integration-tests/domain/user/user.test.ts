@@ -1,7 +1,7 @@
 import { Express } from "express";
 import supertest from "supertest";
-import { reqUser } from "../../../src/domain/user/user";
-import { mockAppIntegration, prismaClient } from "../index";
+import { reqUser } from "../../../../src/domain/user/user";
+import { mockAppIntegration, prismaClient } from "../../index";
 
 const mockReqUser: reqUser = {
   first_name: "Chandara",

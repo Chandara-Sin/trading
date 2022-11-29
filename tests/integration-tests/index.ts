@@ -7,6 +7,5 @@ export const prismaClient = initPrismaClient();
 export const mockAppIntegration = () => {
   const dependencies = initDependencies(prismaClient);
   const app = main(dependencies);
-
   return app;
 };
