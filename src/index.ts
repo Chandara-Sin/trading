@@ -15,7 +15,7 @@ export const initDependencies = (prismaClient: PrismaClient): IAppDependencies =
   userService: userService(prismaClient),
 });
 
-const start = () => {
+(() => {
   try {
     const prismaClient = initPrismaClient();
     const dependencies = initDependencies(prismaClient);
@@ -31,6 +31,4 @@ const start = () => {
   } catch (err) {
     logger.error(err);
   }
-};
-
-start();
+})();
