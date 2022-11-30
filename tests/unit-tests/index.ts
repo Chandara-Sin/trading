@@ -8,18 +8,14 @@ export const mockHandler = () => {
 };
 
 export class MockResponse {
-  status: any;
-  send: any;
+  status: jest.Mock;
+  send: jest.Mock;
 
   constructor() {
-    this.status = this.fnStatus();
-    this.send = jest.fn();
-  }
-
-  fnStatus() {
-    return jest.fn().mockReturnValue({
+    this.status = jest.fn().mockReturnValue({
       send: jest.fn(),
     });
+    this.send = jest.fn();
   }
 
   jsonBody() {
