@@ -1,4 +1,4 @@
-import { Handler, NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { PrismaClientKnownRequestError } from "../../generated/client/runtime";
 import { logger } from "../../logger";
 import { getPage, getRows, IPaginationParams, IPaginationRes } from "../../pagination";
@@ -48,8 +48,7 @@ export const updateUserHandler =
   };
 
 export const deleteUserHandler =
-  (svc: IUserService): Handler =>
-  async (req: Request, res: Response, next: NextFunction) => {
+  (svc: IUserService) => async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
       await svc.deleteUser(id);

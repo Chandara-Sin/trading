@@ -14,6 +14,6 @@ export const appRoutes = (dependencies: IAppDependencies) => (route: Router) => 
   route.get("/users/:id", verifyAPIKey(), getUserHandler(dependencies.userService));
   route.get("/users", verifyAPIKey(), getUserListHandler(dependencies.userService));
   route.put("/users", verifyAPIKey(), updateUserHandler(dependencies.userService));
-  route.delete("/users/:id", verifyAPIKey, deleteUserHandler(dependencies.userService));
+  route.delete("/users/:id", verifyAPIKey(), deleteUserHandler(dependencies.userService));
   return route;
 };
