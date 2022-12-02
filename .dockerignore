@@ -1,12 +1,18 @@
 # Docker file
 Dockerfile
 .dockerignore
+docker-compose.yml
+docker-compose.test.yml
 
 ## Generated file when install and build
 node_modules
 build
 .git
 .gitignore
+.prettierrc
 README.md
 jest.config.integration.ts
 .DS_Store
+db-data
+tests
+docs
