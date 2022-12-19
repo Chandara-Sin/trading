@@ -16,3 +16,6 @@ jest.config.integration.ts
 db-data
 tests
 docs
+/jest.config.ts
+/coverage
+.DS_STORE

@@ -1,4 +1,4 @@
-FROM node:latest AS build
+FROM node:lts-bullseye AS build
 ARG BUILD_TAG
 LABEL build_tag=${BUILD_TAG}
 
@@ -12,7 +12,7 @@ COPY . .
 ARG ENVIRONMENT
 RUN yarn build:${ENVIRONMENT}
 
-FROM node:16.17.0-bullseye-slim
+FROM node:16.18.0-bullseye-slim
 ARG ENVIRONMENT
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 USER node
@@ -22,4 +22,4 @@ COPY --chown=node:node --from=build /root/node_modules /app/node_modules
 COPY --chown=node:node .env.${ENVIRONMENT} /app/.env
 
 EXPOSE 8080
-CMD yarn generate ; dumb-init node ./src/index.js
+CMD yarn generate ; dumb-init node ./index.js
