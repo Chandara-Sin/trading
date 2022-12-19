@@ -1,4 +1,4 @@
-import { Prisma } from "../../src/generated/client";
+import { Prisma } from "@prisma/client";
 
 export interface IPaginationParams {
   page: number;

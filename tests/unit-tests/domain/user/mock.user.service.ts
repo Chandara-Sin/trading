@@ -1,5 +1,5 @@
+import { User } from "@prisma/client";
 import { IUserService } from "../../../../src/domain/user/user.service";
-import { User } from "../../../../src/generated/client";
 
 export const mockUserService = (
   user: Omit<User, "id" | "createdAt" | "updatedAt">

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { PrismaClientKnownRequestError } from "../../generated/client/runtime";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { logger } from "../../logger";
 import { getPage, getRows, IPaginationParams, IPaginationRes } from "../../pagination";
 import { reqUser, UserModel } from "./user";

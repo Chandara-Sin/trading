@@ -1,8 +1,8 @@
 import { NextFunction, Request } from "express-serve-static-core";
-import { mockHandler, MockResponse } from "../../";
+import { mockHandler } from "../../";
 import { createUserHandler } from "../../../../src/domain/user/user.handler";
 import { IUserService } from "../../../../src/domain/user/user.service";
-import { User } from "../../../../src/generated/client";
+import { User } from "@prisma/client";
 import { mockUserService } from "../../domain/user/mock.user.service";
 
 const user: Omit<User, "id" | "createdAt" | "updatedAt"> = {
