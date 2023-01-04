@@ -7,7 +7,7 @@ WORKDIR /root
 
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
-RUN yarn set version stable
+RUN yarn set version ./.yarn/releases/*
 RUN yarn workspaces focus --all --production && rm -rf "$(yarn cache clean)"
 COPY . .
 
