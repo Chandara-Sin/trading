@@ -9,6 +9,7 @@
 /build
 
 # Yarn
+.yarn/*
 .yarn/cache
 !.yarn/patches
 !.yarn/plugins
