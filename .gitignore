@@ -7,3 +7,6 @@
 /coverage
 .DS_STORE
 /build
+
+# Yarn
+.yarn/*
