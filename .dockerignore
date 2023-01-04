@@ -19,3 +19,7 @@ docs
 /jest.config.ts
 /coverage
 .DS_STORE
+
+# Yarn
+.yarn/cache
+.yarn/install-state.gz
