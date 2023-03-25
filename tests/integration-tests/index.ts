@@ -1,5 +1,5 @@
 import { app } from "../../src/app";
-import { initPrismaClient } from "../../src/config/db";
+import { initPrismaClient } from "../../src/store/db";
 import { initDependencies } from "../../src/app";
 
 export const prismaClient = initPrismaClient();

@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { logger } from "../../logger";
 import { getPage, getRows, IPaginationParams, IPaginationRes } from "../../pagination";
 import { reqUser, UserModel } from "./user";
-import { IUserService } from "./user.service";
+import { IUserRepository } from "./user_repository";
 
-export const createUserHandler =
-  (svc: IUserService) => async (req: Request, res: Response, next: NextFunction) => {
+const createUser =
+  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const reqUser: reqUser = req.body;
     try {
       const user = await svc.createUser(reqUser);
@@ -17,8 +17,8 @@ export const createUserHandler =
     }
   };
 
-export const getUserHandler =
-  (svc: IUserService) => async (req: Request, res: Response, next: NextFunction) => {
+const getUser =
+  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
       const user = await svc.getUser(id);
@@ -31,8 +31,8 @@ export const getUserHandler =
     }
   };
 
-export const updateUserHandler =
-  (svc: IUserService) => async (req: Request, res: Response, next: NextFunction) => {
+const updateUser =
+  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const reqUser: Pick<reqUser, "first_name" | "last_name"> & { id: string } = req.body;
     try {
       const user = await svc.updateUser(reqUser);
@@ -47,8 +47,8 @@ export const updateUserHandler =
     }
   };
 
-export const deleteUserHandler =
-  (svc: IUserService) => async (req: Request, res: Response, next: NextFunction) => {
+const deleteUser =
+  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
       await svc.deleteUser(id);
@@ -63,8 +63,8 @@ export const deleteUserHandler =
     }
   };
 
-export const getUserListHandler =
-  (svc: IUserService) => async (req: Request, res: Response, next: NextFunction) => {
+const getUserList =
+  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const { page, rows, sort, direction, search } = req.query as {
       [key: string]: string | undefined;
     };
@@ -89,3 +89,6 @@ export const getUserListHandler =
       next(err);
     }
   };
+
+const userHandler = { createUser, getUser, updateUser, deleteUser, getUserList };
+export default userHandler;

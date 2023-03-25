@@ -1,9 +1,9 @@
-import { NextFunction, Request } from "express-serve-static-core";
-import { mockHandler } from "../../";
-import { createUserHandler } from "../../../../src/domain/user/user.handler";
-import { IUserService } from "../../../../src/domain/user/user.service";
 import { User } from "@prisma/client";
-import { mockUserService } from "../../domain/user/mock.user.service";
+import { NextFunction, Request } from "express";
+import { mockHandler } from "../../";
+import userHandler from "../../../../src/domain/user/user_handler";
+import { IUserRepository } from "../../../../src/domain/user/user_repository";
+import { mockUserRepository } from "./mock.user.repository";
 
 const user: Omit<User, "id" | "createdAt" | "updatedAt"> = {
   firstName: "dome",
@@ -12,20 +12,20 @@ const user: Omit<User, "id" | "createdAt" | "updatedAt"> = {
   hashedPassword: "mock123",
 };
 
-describe("User", () => {
-  let req: Request, res: any, next: NextFunction, userService: IUserService;
+describe("Create User", () => {
+  let req: Request, res: any, next: NextFunction, userRepository: IUserRepository;
   beforeEach(() => {
     ({ req, res, next } = mockHandler());
-    userService = mockUserService(user);
+    userRepository = mockUserRepository(user);
   });
 
-  it("should call user service", async () => {
-    await createUserHandler(userService)(req, res, next);
-    expect(userService.createUser).toBeCalled();
+  it("should call user repository", async () => {
+    await userHandler.createUser(userRepository)(req, res, next);
+    expect(userRepository.createUser).toBeCalled();
   });
 
   it("should return user", async () => {
-    await createUserHandler(userService)(req, res, next);
+    await userHandler.createUser(userRepository)(req, res, next);
     expect(res.status).lastCalledWith(201);
     expect(res.jsonBody()["id"]).toEqual("1");
   });

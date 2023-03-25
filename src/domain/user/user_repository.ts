@@ -2,7 +2,7 @@ import { PrismaClient, User } from "@prisma/client";
 import { getDirection, IPaginationParams } from "../../pagination";
 import { reqUser } from "./user";
 
-export interface IUserService {
+export interface IUserRepository {
   createUser: (user: reqUser) => Promise<User>;
   getUser: (id: string) => Promise<User | null>;
   updateUser: (user: Pick<reqUser, "first_name" | "last_name"> & { id: string }) => Promise<User>;
@@ -10,7 +10,7 @@ export interface IUserService {
   getUserList: (pag: IPaginationParams) => Promise<{ data: User[]; total: number }>;
 }
 
-function userService(db: PrismaClient): IUserService {
+function userRepository(db: PrismaClient): IUserRepository {
   const createUser = async (user: reqUser) =>
     await db.user.create({
       data: {
@@ -52,4 +52,4 @@ function userService(db: PrismaClient): IUserService {
   return { createUser, getUser, updateUser, deleteUser, getUserList };
 }
 
-export default userService;
+export default userRepository;

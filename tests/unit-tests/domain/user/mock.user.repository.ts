@@ -1,9 +1,9 @@
 import { User } from "@prisma/client";
-import { IUserService } from "../../../../src/domain/user/user.service";
+import { IUserRepository } from "../../../../src/domain/user/user_repository";
 
-export const mockUserService = (
+export const mockUserRepository = (
   user: Omit<User, "id" | "createdAt" | "updatedAt">
-): IUserService => {
+): IUserRepository => {
   const createUser = jest.fn().mockImplementation(() =>
     Promise.resolve({
       ...user,
