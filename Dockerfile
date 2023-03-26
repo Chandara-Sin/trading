@@ -14,7 +14,7 @@ COPY . .
 ARG ENVIRONMENT
 RUN yarn build:${ENVIRONMENT}
 
-FROM node:16.18.0-bullseye-slim
+FROM node:18.15.0-bullseye-slim
 ARG ENVIRONMENT
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 USER node

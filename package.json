@@ -42,8 +42,9 @@
     "test:integration": "yarn test:clean && sleep 5 && dotenv -e .env.test -- jest -i --forceExit --config jest.config.integration.ts"
   },
   "packageManager": "yarn@3.3.1",
+  "engineStrict": true,
   "engines": {
-    "node": ">=16.18.0",
+    "node": "^18.0.0",
     "npm": "use yarn instead of npm."
   }
 }
