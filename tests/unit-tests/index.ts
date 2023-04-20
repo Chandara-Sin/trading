@@ -1,24 +1,17 @@
-import { NextFunction, Request } from "express";
+import { NextFunction, Request, Response } from "express";
 
-export const mockHandler = () => {
-  const req = {} as Request;
-  const res = new MockResponse();
+export const mockHandler = <T>(body?: T) => {
+  const req = { body } as Request;
+  const res = mockResponse();
   const next: NextFunction = jest.fn();
   return { req, res, next };
 };
 
-export class MockResponse {
-  status: jest.Mock;
-  send: jest.Mock;
-
-  constructor() {
-    this.status = jest.fn().mockReturnValue({
-      send: jest.fn(),
-    });
-    this.send = jest.fn();
-  }
-
-  jsonBody() {
-    return this.status().send.mock.calls[0][0];
-  }
-}
+const mockResponse = () => {
+  const res = {} as Response;
+  res.status = jest.fn().mockReturnThis();
+  res.sendStatus = jest.fn().mockReturnThis();
+  res.send = jest.fn().mockReturnThis();
+  res.json = jest.fn().mockReturnThis();
+  return res;
+};
