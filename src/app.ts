@@ -11,7 +11,7 @@ import express, {
   urlencoded,
 } from "express";
 import { initPrismaClient } from "./store/db";
-import userRepository, { IUserRepository } from "./domain/user/user_repository";
+import userRepository, { IUserRepository } from "./domain/user/user-repository";
 import { mwLogger } from "./logger";
 import { appRoutes } from "./routes";
 

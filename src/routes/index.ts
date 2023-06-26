@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Dependencies } from "../app";
-import userHandler from "../domain/user/user_handler";
+import userHandler from "../domain/user/user-handler";
 import { verifyAPIKey } from "../mw";
 
 export const appRoutes =

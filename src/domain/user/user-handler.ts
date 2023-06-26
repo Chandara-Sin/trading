@@ -3,7 +3,7 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { logger } from "../../logger";
 import { getPage, getRows, IPaginationParams, IPaginationRes } from "../../pagination";
 import { reqUser, UserModel } from "./user";
-import { IUserRepository } from "./user_repository";
+import { IUserRepository } from "./user-repository";
 
 const createUser =
   (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {

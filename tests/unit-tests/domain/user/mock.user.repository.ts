@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { IUserRepository } from "../../../../src/domain/user/user_repository";
+import { IUserRepository } from "../../../../src/domain/user/user-repository";
 
 export const mockUserRepository = (
   user: Omit<User, "id" | "createdAt" | "updatedAt">
