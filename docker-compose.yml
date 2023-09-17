@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   db:
-    image: postgres:15.2-alpine
+    image: postgres:16.0-alpine
     restart: always
     container_name: postgres
     ports:
@@ -12,6 +12,11 @@ services:
       - POSTGRES_DB=trading
     volumes: 
       - ./db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U root -d trading" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   trading_api:
     image: trading-api
@@ -28,4 +33,5 @@ services:
         - BUILD_TAG=trading-api
         - ENVIRONMENT=local
     depends_on:
-      - db
+      db:
+        condition: service_healthy
