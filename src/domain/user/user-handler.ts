@@ -6,10 +6,10 @@ import { reqUser, UserModel } from "./user";
 import { IUserRepository } from "./user-repository";
 
 const createUser =
-  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
+  (repo: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const reqUser: reqUser = req.body;
     try {
-      const user = await svc.createUser(reqUser);
+      const user = await repo.createUser(reqUser);
       res.status(201).send(new UserModel(user).toJson);
     } catch (err) {
       logger.error("create user err", err);
@@ -18,10 +18,10 @@ const createUser =
   };
 
 const getUser =
-  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
+  (repo: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
-      const user = await svc.getUser(id);
+      const user = await repo.getUser(id);
       user
         ? res.status(200).json(new UserModel(user).toJson)
         : next(new Error(`User ID not found ${id}`));
@@ -32,10 +32,10 @@ const getUser =
   };
 
 const updateUser =
-  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
+  (repo: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const reqUser: Pick<reqUser, "first_name" | "last_name"> & { id: string } = req.body;
     try {
-      const user = await svc.updateUser(reqUser);
+      const user = await repo.updateUser(reqUser);
       res.status(200).json(new UserModel(user).toJson);
     } catch (err) {
       logger.error("update user err", err);
@@ -48,10 +48,10 @@ const updateUser =
   };
 
 const deleteUser =
-  (svc: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
+  (repo: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
-      await svc.deleteUser(id);
+      await repo.deleteUser(id);
       res.status(200).json({ status: "ok" });
     } catch (err) {
       logger.error("delete user err", err);
