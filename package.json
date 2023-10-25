@@ -35,7 +35,7 @@
     "build:local": "tsc -p ./ ; cp package.json ./build ; cp -r prisma ./build",
     "migrate": "yarn prisma migrate dev",
     "generate": "yarn prisma generate",
-    "test": "jest --forceExit --config jest.config.ts",
+    "test": "jest --detectOpenHandles --forceExit --config jest.config.ts",
     "test:clean": "jest --clearCache",
     "database-test:up": "docker-compose -f docker-compose.test.yml up -d && dotenv -e .env.test -- npx prisma migrate dev --name postgres-init",
     "database-test:down": "docker-compose -f docker-compose.test.yml down",
