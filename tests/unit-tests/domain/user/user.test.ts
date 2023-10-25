@@ -1,8 +1,8 @@
 import { User } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import { mockHandler } from "../../";
-import userHandler from "../../../../src/domain/user/user_handler";
-import { IUserRepository } from "../../../../src/domain/user/user_repository";
+import userHandler from "../../../../src/domain/user/user-handler";
+import { IUserRepository } from "../../../../src/domain/user/user-repository";
 import { mockUserRepository } from "./mock.user.repository";
 
 const user: Omit<User, "id" | "createdAt" | "updatedAt"> = {
