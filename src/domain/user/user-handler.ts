@@ -57,7 +57,7 @@ const deleteUser =
       logger.error("delete user err", err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
-          ? new Error(`User ID not found ${id}`)
+          ? new Error("endpoint is not found")
           : err
       );
     }
