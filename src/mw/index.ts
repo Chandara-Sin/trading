@@ -1,7 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 
 export const verifyAPIKey =
-  (): RequestHandler => (req: Request, res: Response, next: NextFunction) => {
+  (): RequestHandler => (req: Request, _: Response, next: NextFunction) => {
     const apiKeyEncoded = Buffer.from(process.env.API_KEY_PUBLIC ?? "").toString("base64");
     const apiKeyHeader = req.get("X-API-KEY");
     next(

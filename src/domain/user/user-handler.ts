@@ -24,7 +24,7 @@ const getUser =
       const user = await repo.getUser(id);
       user
         ? res.status(200).json(new UserModel(user).toJson)
-        : next(new Error(`User ID not found ${id}`));
+        : next(new Error("endpoint is not found"));
     } catch (err) {
       logger.error("get user err", err);
       next(err);
@@ -41,7 +41,7 @@ const updateUser =
       logger.error("update user err", err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
-          ? new Error(`User ID not found ${reqUser.id}`)
+          ? new Error("endpoint is not found")
           : err
       );
     }
@@ -52,7 +52,7 @@ const deleteUser =
     const { id } = req.params;
     try {
       await repo.deleteUser(id);
-      res.status(200).json({ status: "ok" });
+      res.status(204).send();
     } catch (err) {
       logger.error("delete user err", err);
       next(
