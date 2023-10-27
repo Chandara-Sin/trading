@@ -52,7 +52,7 @@ const deleteUser =
     const { id } = req.params;
     try {
       await repo.deleteUser(id);
-      res.status(204).send();
+      res.status(204).end();
     } catch (err) {
       logger.error("delete user err", err);
       next(

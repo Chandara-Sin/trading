@@ -6,10 +6,16 @@ import { verifyAPIKey } from "../mw";
 export const appRoutes =
   ({ userRepository: userRepo }: Dependencies) =>
   (router: Router) => {
-    router.post("/users", verifyAPIKey(), userHandler.createUser(userRepo));
-    router.get("/users/:id", verifyAPIKey(), userHandler.getUser(userRepo));
-    router.get("/users", verifyAPIKey(), userHandler.getUserList(userRepo));
-    router.put("/users", verifyAPIKey(), userHandler.updateUser(userRepo));
-    router.delete("/users/:id", verifyAPIKey(), userHandler.deleteUser(userRepo));
+    router
+      .route("/users/:id")
+      .all(verifyAPIKey())
+      .get(userHandler.getUser(userRepo))
+      .delete(userHandler.deleteUser(userRepo));
+    router
+      .route("/users")
+      .all(verifyAPIKey())
+      .post(userHandler.createUser(userRepo))
+      .get(userHandler.getUserList(userRepo))
+      .put(userHandler.updateUser(userRepo));
     return router;
   };
