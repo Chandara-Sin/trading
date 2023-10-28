@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
-export const mockHandler = <T>(body?: T) => {
-  const req = { body } as Request;
+export const mockHandler = <T>(body?: T, params?: { [key: string]: string }) => {
+  const req = { body, params } as Request;
   const res = mockResponse();
   const next: NextFunction = jest.fn();
   return { req, res, next };
