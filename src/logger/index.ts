@@ -2,20 +2,32 @@ import expressWinston, { requestWhitelist, responseWhitelist } from "express-win
 import { createLogger, format, transports } from "winston";
 const { combine, timestamp, prettyPrint, json, colorize } = format;
 
-export const logger = createLogger({
+const getTraceId = () => `TRD-${Math.floor(Math.random() * 10000000000)}`;
+
+const logger = createLogger({
   level: "info",
   format: combine(json(), timestamp(), prettyPrint()),
   transports: [new transports.Console()],
+  defaultMeta: { traceId: getTraceId() },
 });
 
-export const mwLogger = expressWinston.logger({
-  format: combine(json(), timestamp(), colorize(), prettyPrint()),
+const mwLogger = expressWinston.logger({
+  format: combine(json(), timestamp(), prettyPrint()),
   transports: [new transports.Console()],
+  requestFilter: (req, propName) => {
+    if (propName === "headers") {
+      const { "accept-encoding": encoding, connection, accept, ...props } = req.headers;
+      return props;
+    }
+    return req[propName];
+  },
   requestWhitelist: [
-    ...requestWhitelist.filter(req => req != "httpVersion" && req != "query"),
-    "body",
+    ...requestWhitelist.filter(req => !["httpVersion", "query", "url"].includes(req)),
   ],
-  responseWhitelist: [...responseWhitelist, "body"],
+  responseWhitelist: [...responseWhitelist],
   expressFormat: true,
   colorize: false,
+  statusLevels: true,
 });
+
+export { logger, mwLogger };
