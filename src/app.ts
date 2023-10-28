@@ -1,19 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import express, {
-  Express,
-  json,
-  NextFunction,
-  Request,
-  Response,
-  Router,
-  urlencoded,
-} from "express";
-import { initPrismaClient } from "./store/db";
+import express, { Express, json, Response, Router, urlencoded } from "express";
 import userRepository, { IUserRepository } from "./domain/user/user-repository";
+import { errReqHandler } from "./exception";
 import { mwLogger } from "./logger";
 import { appRoutes } from "./routes";
+import { initPrismaClient } from "./store/db";
 
 export interface Dependencies {
   userRepository: IUserRepository;
@@ -35,16 +28,9 @@ export const app = (dependencies: Dependencies): Express => {
     })
   );
   app.use(mwLogger);
-
   app.use("/api", appRoutes(dependencies)(Router()));
   app.get("/api/healthz", (_, res: Response) => res.status(200).json({ message: "Ok v1" }));
-
-  app.use((error: unknown, _: Request, res: Response, __: NextFunction) =>
-    res.status(500).json({
-      status_code: 500,
-      message: (error as Error).message,
-    })
-  );
+  app.use(errReqHandler);
   return app;
 };
 
