@@ -4,6 +4,7 @@ import { logger } from "../../logger";
 import { getPage, getRows, IPaginationParams, IPaginationRes } from "../../pagination";
 import { reqUser, UserError, UserModel } from "./user";
 import { IUserRepository } from "./user-repository";
+import { NotFound } from "../../exception";
 
 const createUser =
   (repo: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {
@@ -24,7 +25,7 @@ const getUser =
       const user = await repo.getUser(id);
       user
         ? res.status(200).json(new UserModel(user).toJson)
-        : next(new Error("endpoint is not found"));
+        : next(NotFound({ code: UserError.GetUserError, message: "endpoint is not found" }));
     } catch (err) {
       logger.error(UserError.GetUserError, err);
       next(err);
@@ -41,7 +42,7 @@ const updateUser =
       logger.error(UserError.UpdateUserListError, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
-          ? new Error("endpoint is not found")
+          ? NotFound({ code: UserError.GetUserError, message: "endpoint is not found" })
           : err
       );
     }
@@ -57,7 +58,7 @@ const deleteUser =
       logger.error(UserError.DeleteUserError, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
-          ? new Error("endpoint is not found")
+          ? NotFound({ code: UserError.GetUserError, message: "endpoint is not found" })
           : err
       );
     }

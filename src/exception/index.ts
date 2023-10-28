@@ -1,4 +1,5 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import { logger } from "../logger";
 
 interface IException extends Omit<Error, "name"> {
   code: string;
@@ -25,7 +26,8 @@ const errReqHandler: ErrorRequestHandler = (
   _: Request,
   res: Response,
   __: NextFunction
-) =>
+) => {
+  logger.error((error as Error).message);
   error instanceof errorResponse
     ? res.status(error.statusCode).json({
         code: error.code,
@@ -35,5 +37,6 @@ const errReqHandler: ErrorRequestHandler = (
         code: "Internal Server Error",
         message: (error as Error).message,
       });
+};
 
 export { BadRequest, Unauthorized, NotFound, MethodNotAllow, errReqHandler };

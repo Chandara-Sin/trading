@@ -5,7 +5,6 @@ enum AuthError {
   Unauthorized = "TRD-AUTH-0001",
   Forbidden = "TRD-AUTH-0002",
   MethodNotAllow = "TRD-AUTH-0002",
-  InternalServerError = "TRD-AUTH-0005",
 }
 
 const verifyAPIKey = (): RequestHandler => (req: Request, _: Response, next: NextFunction) => {
