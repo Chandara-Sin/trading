@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { logger } from "../../logger";
 import { getPage, getRows, IPaginationParams, IPaginationRes } from "../../pagination";
-import { reqUser, UserModel } from "./user";
+import { reqUser, UserError, UserModel } from "./user";
 import { IUserRepository } from "./user-repository";
 
 const createUser =
@@ -12,7 +12,7 @@ const createUser =
       const user = await repo.createUser(reqUser);
       res.status(201).send(new UserModel(user).toJson);
     } catch (err) {
-      logger.error("create user err", err);
+      logger.error(UserError.CreateUserError, err);
       next(err);
     }
   };
@@ -26,7 +26,7 @@ const getUser =
         ? res.status(200).json(new UserModel(user).toJson)
         : next(new Error("endpoint is not found"));
     } catch (err) {
-      logger.error("get user err", err);
+      logger.error(UserError.GetUserError, err);
       next(err);
     }
   };
@@ -38,7 +38,7 @@ const updateUser =
       const user = await repo.updateUser(reqUser);
       res.status(200).json(new UserModel(user).toJson);
     } catch (err) {
-      logger.error("update user err", err);
+      logger.error(UserError.UpdateUserListError, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
           ? new Error("endpoint is not found")
@@ -54,7 +54,7 @@ const deleteUser =
       await repo.deleteUser(id);
       res.status(204).end();
     } catch (err) {
-      logger.error("delete user err", err);
+      logger.error(UserError.DeleteUserError, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
           ? new Error("endpoint is not found")
@@ -85,7 +85,7 @@ const getUserList =
       };
       res.status(200).send(userList);
     } catch (err) {
-      logger.error("get user list err", err);
+      logger.error(UserError.GeteUserListError, err);
       next(err);
     }
   };
