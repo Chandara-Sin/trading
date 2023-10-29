@@ -17,7 +17,10 @@ const user: Omit<User, "id" | "createdAt" | "updatedAt"> = {
 describe("User", () => {
   let req: Request, res: Response, next: NextFunction, userRepository: IUserRepository;
   beforeEach(() => {
-    ({ req, res, next } = mockHandler(user, { id: "fd2644b2-f943-403b-9c0f-173b15fa6060" }));
+    ({ req, res, next } = mockHandler({
+      body: user,
+      params: { id: "fd2644b2-f943-403b-9c0f-173b15fa6060" },
+    }));
     userRepository = mockUserRepository(user);
   });
 
