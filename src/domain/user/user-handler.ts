@@ -39,7 +39,7 @@ const updateUser =
       const user = await repo.updateUser(reqUser);
       res.status(200).json(new UserModel(user).toJson);
     } catch (err) {
-      logger.error(UserError.UpdateUserListError, err);
+      logger.error(UserError.UpdateUserError, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
           ? NotFound({ code: UserError.GetUserError, message: "endpoint is not found" })
