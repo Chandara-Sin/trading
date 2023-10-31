@@ -48,7 +48,7 @@ describe("User", () => {
     it("should inform User to register first before login", async () => {
       await userHandler.getUser(userRepository)(req, res, next);
       expect(next).toBeCalledWith(
-        NotFound({ code: UserError.GetUserError, message: "endpoint is not found" })
+        NotFound({ code: UserError.Get, message: "endpoint is not found" })
       );
     });
   });

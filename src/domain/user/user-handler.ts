@@ -13,7 +13,7 @@ const createUser =
       const user = await repo.createUser(reqUser);
       res.status(201).send(new UserModel(user).toJson);
     } catch (err) {
-      logger.error(UserError.CreateUserError, err);
+      logger.error(UserError.Create, err);
       next(err);
     }
   };
@@ -25,9 +25,9 @@ const getUser =
       const user = await repo.getUser(id);
       user
         ? res.status(200).json(new UserModel(user).toJson)
-        : next(NotFound({ code: UserError.GetUserError, message: "endpoint is not found" }));
+        : next(NotFound({ code: UserError.Get, message: "endpoint is not found" }));
     } catch (err) {
-      logger.error(UserError.GetUserError, err);
+      logger.error(UserError.Get, err);
       next(err);
     }
   };
@@ -39,10 +39,10 @@ const updateUser =
       const user = await repo.updateUser(reqUser);
       res.status(200).json(new UserModel(user).toJson);
     } catch (err) {
-      logger.error(UserError.UpdateUserError, err);
+      logger.error(UserError.Update, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
-          ? NotFound({ code: UserError.GetUserError, message: "endpoint is not found" })
+          ? NotFound({ code: UserError.Get, message: "endpoint is not found" })
           : err
       );
     }
@@ -55,10 +55,10 @@ const deleteUser =
       await repo.deleteUser(id);
       res.status(204).end();
     } catch (err) {
-      logger.error(UserError.DeleteUserError, err);
+      logger.error(UserError.Delete, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
-          ? NotFound({ code: UserError.GetUserError, message: "endpoint is not found" })
+          ? NotFound({ code: UserError.Get, message: "endpoint is not found" })
           : err
       );
     }
@@ -86,7 +86,7 @@ const getUserList =
       };
       res.status(200).send(userList);
     } catch (err) {
-      logger.error(UserError.GeteUserListError, err);
+      logger.error(UserError.GetList, err);
       next(err);
     }
   };

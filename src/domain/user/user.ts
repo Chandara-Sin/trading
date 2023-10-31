@@ -8,11 +8,11 @@ export interface reqUser {
 }
 
 export enum UserError {
-  CreateUserError = "TRD-USR-0001",
-  GetUserError = "TRD-USR-0002",
-  GeteUserListError = "TRD-USR-0003",
-  UpdateUserError = "TRD-USR-0004",
-  DeleteUserError = "TRD-USR-0005",
+  Create = "TRD-USR-0001",
+  Get = "TRD-USR-0002",
+  GetList = "TRD-USR-0003",
+  Update = "TRD-USR-0004",
+  Delete = "TRD-USR-0005",
 }
 
 export class UserModel {
