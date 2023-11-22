@@ -1,11 +1,11 @@
-import { User } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import { mockHandler } from "../../";
+import { UserError } from "../../../../src/domain/user/user";
 import userHandler from "../../../../src/domain/user/user-handler";
 import { IUserRepository } from "../../../../src/domain/user/user-repository";
-import { mockUserRepository } from "./mock.user.repository";
 import { NotFound } from "../../../../src/exception";
-import { UserError } from "../../../../src/domain/user/user";
+import { User } from "../../../../src/generated/client";
+import { mockUserRepository } from "./mock.user.repository";
 
 const user: Omit<User, "id" | "createdAt" | "updatedAt"> = {
   firstName: "dome",
