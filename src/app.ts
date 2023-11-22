@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "./generated/client";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { Express, json, Response, Router, urlencoded } from "express";

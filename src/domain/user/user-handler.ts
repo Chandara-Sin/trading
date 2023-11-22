@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { logger } from "../../logger";
-import { getPage, getRows, IPaginationParams, IPaginationRes } from "../../pagination";
-import { reqUser, UserError, UserModel } from "./user";
-import { IUserRepository } from "./user-repository";
 import { NotFound } from "../../exception";
+import { PrismaClientKnownRequestError } from "../../generated/client/runtime/library";
+import { logger } from "../../logger";
+import { IPaginationParams, IPaginationRes, getPage, getRows } from "../../pagination";
+import { UserError, UserModel, reqUser } from "./user";
+import { IUserRepository } from "./user-repository";
 
 const createUser =
   (repo: IUserRepository) => async (req: Request, res: Response, next: NextFunction) => {

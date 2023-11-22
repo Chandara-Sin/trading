@@ -1,6 +1,6 @@
-import { User } from "@prisma/client";
 import { IUserRepository } from "../../../../src/domain/user/user-repository";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { User } from "../../../../src/generated/client";
+import { PrismaClientKnownRequestError } from "../../../../src/generated/client/runtime/library";
 
 export const mockUserRepository = (
   user: Omit<User, "id" | "createdAt" | "updatedAt">

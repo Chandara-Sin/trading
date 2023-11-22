@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User } from "../../generated/client";
 
 export interface reqUser {
   first_name: string;

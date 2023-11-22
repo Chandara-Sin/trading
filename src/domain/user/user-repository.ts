@@ -1,5 +1,5 @@
-import { PrismaClient, User } from "@prisma/client";
-import { getDirection, IPaginationParams } from "../../pagination";
+import { PrismaClient, User } from "../../generated/client";
+import { IPaginationParams, getDirection } from "../../pagination";
 import { reqUser } from "./user";
 
 export interface IUserRepository {
