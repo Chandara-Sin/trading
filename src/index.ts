@@ -1,7 +1,8 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import { initServer } from "./app";
 import { logger } from "./logger";
 
+dotenv.config();
 const port = process.env.PORT ?? "8000";
 
 (() => {

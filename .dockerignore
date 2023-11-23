@@ -11,15 +11,22 @@ build
 .gitignore
 .prettierrc
 README.md
-jest.config.integration.ts
-.DS_Store
 db-data
-tests
 docs
+.vscode
+
+# Testing
+tests
+/jest.config.integration.ts
 /jest.config.ts
 /coverage
 .DS_STORE
 
+# Prisma
+/src/generated
+
 # Yarn
 .yarn/cache
 .yarn/install-state.gz
+.yarn/unplugged
+.yarn/sdks
