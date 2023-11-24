@@ -79,7 +79,7 @@ yarn test:integration
 NODE_ENV=
 PORT=
 DATABASE_URL=postgresql://<user>:<password>@postgres:<port>/<db>?schema=public&connect_timeout=300
-PRISMA_GENERATE_OUTPUT=../src/generated/client
+PRISMA_GENERATE_OUTPUT=../generated/client
 API_KEY_PUBLIC=
 ```
 
