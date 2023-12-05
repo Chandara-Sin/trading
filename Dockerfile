@@ -22,7 +22,6 @@ COPY --chown=node:node --from=build /root/build/ /app
 COPY --chown=node:node --from=build /root/.pnp.cjs ./.pnp.cjs
 COPY --chown=node:node --from=build /root/.yarn ./.yarn
 COPY --chown=node:node --from=build /root/.yarnrc.yml /root/yarn.lock /root/package.json ./
-COPY --chown=node:node .env.${ENVIRONMENT} /app/.env
 
 EXPOSE 8080
 CMD yarn generate && dumb-init yarn node ./index.js

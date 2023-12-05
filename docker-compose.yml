@@ -20,9 +20,9 @@ services:
 
   trading_api:
     image: trading-api
-    # platform: linux/amd64
     container_name: trading-api
     restart: always
+    # platform: linux/amd64
     # command: sh -c "yarn generate && node ./src/index.js"
     ports:
       - '8080:8080'
@@ -32,6 +32,8 @@ services:
       args:
         - BUILD_TAG=trading-api
         - ENVIRONMENT=local
+    env_file:
+      - .env.local
     depends_on:
       db:
         condition: service_healthy
