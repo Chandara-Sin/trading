@@ -27,13 +27,13 @@ describe("User", () => {
   describe("Create User", () => {
     it("should call user repository", async () => {
       await userHandler.createUser(userRepository)(req, res, next);
-      expect(userRepository.createUser).toBeCalledWith(user);
+      expect(userRepository.createUser).toHaveBeenCalledWith(user);
     });
 
     test("User should be able to register", async () => {
       await userHandler.createUser(userRepository)(req, res, next);
-      expect(res.status).lastCalledWith(201);
-      expect(res.send).toBeCalledWith({
+      expect(res.status).toHaveBeenLastCalledWith(201);
+      expect(res.send).toHaveBeenCalledWith({
         id: "1",
         first_name: "dome",
         last_name: "me",
@@ -47,7 +47,7 @@ describe("User", () => {
   describe("Get User", () => {
     it("should inform User to register first before login", async () => {
       await userHandler.getUser(userRepository)(req, res, next);
-      expect(next).toBeCalledWith(
+      expect(next).toHaveBeenCalledWith(
         NotFound({ code: UserError.Get, message: "endpoint is not found" })
       );
     });
