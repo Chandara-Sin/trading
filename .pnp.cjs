@@ -26,7 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@prisma/client", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:5.6.0"],\
+          ["@prisma/client", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:5.7.0"],\
           ["@types/bcryptjs", "npm:2.4.6"],\
           ["@types/cookie-parser", "npm:1.4.6"],\
           ["@types/cors", "npm:2.8.17"],\
@@ -43,7 +43,7 @@ const RAW_RUNTIME_STATE =
           ["express", "npm:4.18.2"],\
           ["express-winston", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:4.2.0"],\
           ["jest", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:29.7.0"],\
-          ["prisma", "npm:5.6.0"],\
+          ["prisma", "npm:5.7.0"],\
           ["supertest", "npm:6.3.3"],\
           ["ts-jest", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:29.1.1"],\
           ["ts-node", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:10.9.1"],\
@@ -1372,20 +1372,19 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@prisma/client", [\
-      ["npm:5.6.0", {\
-        "packageLocation": "./.yarn/unplugged/@prisma-client-virtual-5b282d3318/node_modules/@prisma/client/",\
+      ["npm:5.7.0", {\
+        "packageLocation": "./.yarn/unplugged/@prisma-client-virtual-7f513b05f5/node_modules/@prisma/client/",\
         "packageDependencies": [\
-          ["@prisma/client", "npm:5.6.0"]\
+          ["@prisma/client", "npm:5.7.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:5.6.0", {\
-        "packageLocation": "./.yarn/unplugged/@prisma-client-virtual-5b282d3318/node_modules/@prisma/client/",\
+      ["virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:5.7.0", {\
+        "packageLocation": "./.yarn/unplugged/@prisma-client-virtual-7f513b05f5/node_modules/@prisma/client/",\
         "packageDependencies": [\
-          ["@prisma/client", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:5.6.0"],\
-          ["@prisma/engines-version", "npm:5.6.0-32.e95e739751f42d8ca026f6b910f5a2dc5adeaeee"],\
+          ["@prisma/client", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:5.7.0"],\
           ["@types/prisma", null],\
-          ["prisma", "npm:5.6.0"]\
+          ["prisma", "npm:5.7.0"]\
         ],\
         "packagePeers": [\
           "@types/prisma",\
@@ -1394,20 +1393,55 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@prisma/engines", [\
-      ["npm:5.6.0", {\
-        "packageLocation": "./.yarn/unplugged/@prisma-engines-npm-5.6.0-2182f804e0/node_modules/@prisma/engines/",\
+    ["@prisma/debug", [\
+      ["npm:5.7.0", {\
+        "packageLocation": "./.yarn/cache/@prisma-debug-npm-5.7.0-6204be368b-c51c8d1c35.zip/node_modules/@prisma/debug/",\
         "packageDependencies": [\
-          ["@prisma/engines", "npm:5.6.0"]\
+          ["@prisma/debug", "npm:5.7.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@prisma/engines", [\
+      ["npm:5.7.0", {\
+        "packageLocation": "./.yarn/unplugged/@prisma-engines-npm-5.7.0-9938283bb9/node_modules/@prisma/engines/",\
+        "packageDependencies": [\
+          ["@prisma/engines", "npm:5.7.0"],\
+          ["@prisma/debug", "npm:5.7.0"],\
+          ["@prisma/engines-version", "npm:5.7.0-41.79fb5193cf0a8fdbef536e4b4a159cad677ab1b9"],\
+          ["@prisma/fetch-engine", "npm:5.7.0"],\
+          ["@prisma/get-platform", "npm:5.7.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@prisma/engines-version", [\
-      ["npm:5.6.0-32.e95e739751f42d8ca026f6b910f5a2dc5adeaeee", {\
-        "packageLocation": "./.yarn/cache/@prisma-engines-version-npm-5.6.0-32.e95e739751f42d8ca026f6b910f5a2dc5adeaeee-24711335d0-0a6248f702.zip/node_modules/@prisma/engines-version/",\
+      ["npm:5.7.0-41.79fb5193cf0a8fdbef536e4b4a159cad677ab1b9", {\
+        "packageLocation": "./.yarn/cache/@prisma-engines-version-npm-5.7.0-41.79fb5193cf0a8fdbef536e4b4a159cad677ab1b9-c6379fb00c-0384f8760f.zip/node_modules/@prisma/engines-version/",\
         "packageDependencies": [\
-          ["@prisma/engines-version", "npm:5.6.0-32.e95e739751f42d8ca026f6b910f5a2dc5adeaeee"]\
+          ["@prisma/engines-version", "npm:5.7.0-41.79fb5193cf0a8fdbef536e4b4a159cad677ab1b9"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@prisma/fetch-engine", [\
+      ["npm:5.7.0", {\
+        "packageLocation": "./.yarn/cache/@prisma-fetch-engine-npm-5.7.0-27f16be6c7-95694d03f7.zip/node_modules/@prisma/fetch-engine/",\
+        "packageDependencies": [\
+          ["@prisma/fetch-engine", "npm:5.7.0"],\
+          ["@prisma/debug", "npm:5.7.0"],\
+          ["@prisma/engines-version", "npm:5.7.0-41.79fb5193cf0a8fdbef536e4b4a159cad677ab1b9"],\
+          ["@prisma/get-platform", "npm:5.7.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@prisma/get-platform", [\
+      ["npm:5.7.0", {\
+        "packageLocation": "./.yarn/cache/@prisma-get-platform-npm-5.7.0-a444f4f28b-9dcb0f5042.zip/node_modules/@prisma/get-platform/",\
+        "packageDependencies": [\
+          ["@prisma/get-platform", "npm:5.7.0"],\
+          ["@prisma/debug", "npm:5.7.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5784,11 +5818,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prisma", [\
-      ["npm:5.6.0", {\
-        "packageLocation": "./.yarn/unplugged/prisma-npm-5.6.0-974a3e0044/node_modules/prisma/",\
+      ["npm:5.7.0", {\
+        "packageLocation": "./.yarn/unplugged/prisma-npm-5.7.0-33f23bb85f/node_modules/prisma/",\
         "packageDependencies": [\
-          ["prisma", "npm:5.6.0"],\
-          ["@prisma/engines", "npm:5.6.0"]\
+          ["prisma", "npm:5.7.0"],\
+          ["@prisma/engines", "npm:5.7.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6583,7 +6617,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["trading-service", "workspace:."],\
-          ["@prisma/client", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:5.6.0"],\
+          ["@prisma/client", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:5.7.0"],\
           ["@types/bcryptjs", "npm:2.4.6"],\
           ["@types/cookie-parser", "npm:1.4.6"],\
           ["@types/cors", "npm:2.8.17"],\
@@ -6600,7 +6634,7 @@ const RAW_RUNTIME_STATE =
           ["express", "npm:4.18.2"],\
           ["express-winston", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:4.2.0"],\
           ["jest", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:29.7.0"],\
-          ["prisma", "npm:5.6.0"],\
+          ["prisma", "npm:5.7.0"],\
           ["supertest", "npm:6.3.3"],\
           ["ts-jest", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:29.1.1"],\
           ["ts-node", "virtual:28af11a411f6d2b9cbd0f8ceebcd77e6261525d38fac268ae8384bbeda788607fec3ec825eeef1fcb538a0134af025a7e005d8d52eb9079f73154b84521dead4#npm:10.9.1"],\
