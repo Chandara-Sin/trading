@@ -42,7 +42,7 @@ const updateUser =
       logger.error(UserError.Update, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
-          ? NotFound({ code: UserError.Get, message: "endpoint is not found" })
+          ? NotFound({ code: UserError.Update, message: "endpoint is not found" })
           : err
       );
     }
@@ -58,7 +58,7 @@ const deleteUser =
       logger.error(UserError.Delete, err);
       next(
         err instanceof PrismaClientKnownRequestError && err.code === "P2025"
-          ? NotFound({ code: UserError.Get, message: "endpoint is not found" })
+          ? NotFound({ code: UserError.Delete, message: "endpoint is not found" })
           : err
       );
     }
