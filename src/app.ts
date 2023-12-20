@@ -4,7 +4,7 @@ import cors from "cors";
 import express, { Express, json, Response, Router, urlencoded } from "express";
 import userRepository, { IUserRepository } from "./domain/user/user-repository";
 import { errReqHandler } from "./exception";
-import { mwLogger } from "./logger";
+import { logger, mwLogger } from "./logger";
 import { appRoutes } from "./routes";
 import { initPrismaClient } from "./store/db";
 
@@ -35,7 +35,12 @@ export const app = (dependencies: Dependencies): Express => {
 };
 
 export const initServer = () => {
-  const prismaClient = initPrismaClient();
-  const dependencies = initDependencies(prismaClient);
-  return app(dependencies);
+  try {
+    const prismaClient = initPrismaClient();
+    const dependencies = initDependencies(prismaClient);
+    return app(dependencies);
+  } catch (error) {
+    logger.error(error);
+    throw error;
+  }
 };
