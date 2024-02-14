@@ -5,6 +5,8 @@
 
 ## Development
 
+[![Code Style: Prettier](https://img.shields.io/badge/Code_Style-Prettier-fb6f92.svg?style=flat-square)](https://prettier.io/)
+
 ### Create `.env` for API
 
 ```env
